@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* White text for contrast */
+            height: 100vh;
+            overflow: hidden; /* Prevent overflow from the page */
+        }
+
+        .buttons {
+            position: fixed;
+            top: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            background-color: rgba(50, 50, 50, 0.9); /* Dark semi-transparent background */
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1e88e5; /* Blue button color */
+            border: none;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #1565c0; /* Darker blue on hover */
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+
+        .image-container {
+            margin-top: 80px; /* Space for fixed buttons */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align image to the top */
+            width: 100%;
+            height: calc(100vh - 80px);
+            overflow: auto; /* Enable scrolling */
+            position: relative;
+        }
+
+        img {
+            max-width: 90%;
+            max-height: 90%;
+            transition: transform 0.3s ease;
+            transform-origin: top; /* Ensure zoom starts from the top */
+            border: 2px solid #444444; /* Subtle border for contrast */
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button id="zoomIn">
+            <span class="icon">🔍+</span> Zoom In
+        </button>
+        <button id="zoomOut">
+            <span class="icon">🔍-</span> Zoom Out
+        </button>
+    </div>
+    <div class="image-container">
+        <img id="zoomImage" src="./src/img.png" alt="Sample Image">
+    </div>
+
+    <script>
+        const image = document.getElementById("zoomImage");
+        const zoomInBtn = document.getElementById("zoomIn");
+        const zoomOutBtn = document.getElementById("zoomOut");
+        let scale = 0.1;
+
+        image.style.transform = `scale(${scale})`;
+
+        zoomInBtn.addEventListener("click", () => {
+            scale = Math.min(2.5, scale + 0.25);
+            image.style.transform = `scale(${scale})`;
+        });
+
+        zoomOutBtn.addEventListener("click", () => {
+            scale = Math.max(0, scale - 0.75);
+            image.style.transform = `scale(${scale})`;
+        });
+    </script>
+</body>
+</html>
